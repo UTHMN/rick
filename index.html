@@ -11,7 +11,15 @@
     <source src="https://ia601509.us.archive.org/10/items/Rick_Astley_Never_Gonna_Give_You_Up/Rick_Astley_Never_Gonna_Give_You_Up.mp4" type="video/mp4">
     Your browser does not support .mp4 or the video tag.
   </video>
+  <audio autoplay loop id="audioContainer">
+    <source src="rick.mp4" type="audio/mp4">
+    <source src="https://ia601509.us.archive.org/10/items/Rick_Astley_Never_Gonna_Give_You_Up/Rick_Astley_Never_Gonna_Give_You_Up.mp4" type="audio/mp4">
+  </audio>
   <style>
+    #audioContainer {
+      display: none;
+    }
+    
     #myVideo {
       position: fixed;
       right: 0;
@@ -20,5 +28,22 @@
       min-height: 100%;
     }
   </style>
+  <script>
+    // Check if the audio is muted due to browser restrictions
+    var audio = document.getElementById("audioContainer");
+    var promise = audio.play();
+
+    if (promise !== undefined) {
+      promise.then(_ => {
+        // Autoplay started!
+      }).catch(error => {
+        // Autoplay was prevented.
+        // You can try to play the audio again on user interaction.
+        document.addEventListener('click', function() {
+          audio.play();
+        });
+      });
+    }
+  </script>
 </body>
 </html>
